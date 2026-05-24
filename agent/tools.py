@@ -56,14 +56,30 @@ def search_studies(query: str, author_year: str = None) -> list:
 
 @tool
 def compare_studies(query: str, ids: list) -> list:
-    """Search the clinical research corpus for studies relevant to a query for comparison"""
+    """Compare findings across multiple studies in the clinical research corpus.
+    Pass author_year values in ids list.
+    
+    Available studies:
+    - "Honghao 2025"
+    - "Mengxin Wang 2025"
+    - "Catherine Scott 2025"
+    - "Grace Joshy 2025"
+    - "Ping Wang 2025"
+    - "Yun Feng 2025"
+    - "Yutung Yen 2025"
+    
+    Example: ids=["Honghao 2025", "Mengxin Wang 2025"]
+    """
     print("compare_studies agent invoked")
     result = []
     try:
-        for id in ids:
-            str_id = str(id)
-            print(f"Searching for id: {str_id}, type: {type(str_id)}")
-            docs = vector_store.similarity_search(query, k=3, filter={"study_id": str_id})
+        for author_year in ids:
+            print(f"Searching for author_year: {author_year}")
+            docs = vector_store.similarity_search(
+                query, 
+                k=3, 
+                filter={"author_year": {"$eq": author_year}}
+            )
             print(f"Docs found: {len(docs)}")
             for doc in docs:
                 meta = doc.metadata
