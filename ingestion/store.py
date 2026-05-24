@@ -1,4 +1,4 @@
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 from config import VECTOR_STORE_DIR, EMBEDDING_MODEL, TOP_K
 
