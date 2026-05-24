@@ -11,7 +11,13 @@ def get_vector_store():
     return vector_store
 
 
-def get_retriever():
+def get_retriever(author_year: str = None):
     vector_store = get_vector_store()
-    retriever = vector_store.as_retriever(search_kwargs={"k": TOP_K})
+    
+    search_kwargs = {"k": TOP_K}
+    
+    if author_year:
+        search_kwargs["filter"] = {"author_year": {"$eq": author_year}}
+    
+    retriever = vector_store.as_retriever(search_kwargs=search_kwargs)
     return retriever
