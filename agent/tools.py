@@ -18,6 +18,8 @@ def search_studies(query: str) ->list:
         result = []
         for doc in docs:
             meta = doc.metadata
+            print(meta)
+            print(doc.page_content[:200])
             result.append({
                 "study_id": meta.get("study_id"),
                 "author_year": meta.get("author_year"),
