@@ -7,7 +7,9 @@ def get_vector_store():
         persist_directory=VECTOR_STORE_DIR,
         embedding_function=OpenAIEmbeddings(model=EMBEDDING_MODEL)
     )
+    print(f"DB chunk count: {vector_store._collection.count()}")
     return vector_store
+
 
 def get_retriever():
     vector_store = get_vector_store()
