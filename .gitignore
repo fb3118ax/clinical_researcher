@@ -1,4 +1,4 @@
 .env
 __pycache__/
 *.pyc
-research_asst_db/
+research_asst_db/*.ipynb
